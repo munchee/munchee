@@ -1,3 +1,4 @@
+import os
 from munchee.settings import *
 # Azure prod-specific variables config
 DEBUG = False
