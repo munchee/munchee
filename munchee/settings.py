@@ -28,7 +28,7 @@ if os.getenv("DJANGO_DEBUG") == "Production":
     DEBUG = False
     SECRET_KEY = os.environ["DJANGO_KEY"]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["http://munchee.azurewebsites.net", "mchee.co"]
 
 
 # Application definition
