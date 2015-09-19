@@ -22,10 +22,10 @@ class Company(models.Model):
 	# id = models.CharField(max_length=80)
 
 	relevant_skills = models.TextField(default="{}")
-	links = models.SeparatedValuesField()
-	positions = models.SeparatedValuesField()
+	links = SeparatedValuesField()
+	positions = SeparatedValuesField()
 
-	def upduate():
+	def update():
 		# crawls relevant pages to update summary and positions if necessary
 		last_updated = datetime.now()
 		# update summary
@@ -37,7 +37,7 @@ class Profile(models.Model):
 	name = models.CharField(max_length=80)
 
 	relevant_skills = models.TextField(default='{}')
-	interested_positions = models.SeparatedValuesField()
+	interested_positions = SeparatedValuesField()
 
 class Experience(models.Model):
 	summary = models.TextField()
