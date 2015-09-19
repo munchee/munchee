@@ -1,3 +1,2 @@
 django
-numpy
 python-social-auth
