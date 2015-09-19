@@ -59,6 +59,9 @@ target/
 # Local database
 *.sqlite3
 
+# Local settings
+settings_local.py
+
 # IDE project files
 .idea
 
