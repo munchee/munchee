@@ -1,3 +1,4 @@
+from munchee.settings import *
 # Azure prod-specific variables config
 DEBUG = False
 ALLOWED_HOSTS = ["munchee.azurewebsites.net", "mchee.co"]
