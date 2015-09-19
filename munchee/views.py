@@ -3,6 +3,9 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 from .forms import *
 from .models import *
+from linkedin.linkedin import (LinkedInAuthentication, LinkedInApplication,
+                               PERMISSIONS)
+from django.conf import settings
 
 # Create your views here.
 def home(request):
@@ -20,3 +23,27 @@ def search(request):
 
     return render(request, 'munchee/search.html', {})
 
+def oauth_login_start(request):
+    authentication = LinkedInAuthentication(settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY,
+                                            settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET,
+                                            settings.RETURN_URL,
+                                            PERMISSIONS.enums.values())
+    return HttpResponseRedirect(authentication.authorization_url)
+
+def oauth_callback(request):
+    authentication = LinkedInAuthentication(settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY,
+                                            settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET,
+                                            settings.RETURN_URL,
+                                            PERMISSIONS.enums.values())
+    if request.method == 'GET':
+        form = OAuthCallbackForm(request.GET)
+        if form.is_valid():
+            """cleaned_code = form.cleaned_data['code']
+            cleaned_state = form.cleaned_data['state']
+            return HttpResponse("Code: " + cleaned_code + "\nState: " + cleaned_state)"""
+            authentication.authorization_code = form.cleaned_data['code']
+            token = authentication.get_access_token()
+
+            application = LinkedInApplication(token=token)
+
+            # do stuff with application and then return list. Possibly store application in session data

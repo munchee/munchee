@@ -13,3 +13,7 @@ class CompanyForm(forms.Form):
         label = "e.g. software, technology, ...",
         required = False,
     )
+
+class OAuthCallbackForm(forms.Form):
+    code = forms.CharField()
+    state = forms.CharField()

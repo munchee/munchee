@@ -27,6 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+RETURN_URL = "http://localhost:8000/complete/linkedin-oauth2/"
+
 
 # Application definition
 
