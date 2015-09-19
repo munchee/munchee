@@ -112,4 +112,7 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_basicprofile']
 
-from munchee.settings_local import *
+try:
+    from munchee.settings_local import *
+except:
+    pass
