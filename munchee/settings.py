@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
+    'munchee',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -100,3 +104,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.linkedin.LinkedinOAuth2',
+)
+
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_basicprofile']
+
+try:
+    from settings_local import *
+except:
+    SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ["LINKEDIN_KEY"]
+    SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ["LINKEDIN_SECRET"]

@@ -1,0 +1,4 @@
+# copy this to settings_local.py then
+# check the Slack for the keys
+SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = 'LOLKEY'
+SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = 'LOLSEEKRET'
