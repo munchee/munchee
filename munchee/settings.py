@@ -112,7 +112,7 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SCOPE = ['r_basicprofile']
 
-try:
+if os.environ["DJANGO_DEBUG"] == "Production":
     from settings_azure import *
-except:
+else:
     from settings_local import *
