@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
+from .forms import *
 from .models import *
 
 # Create your views here.
@@ -13,6 +14,6 @@ def search(request):
         if form.is_valid():
             return HttpResponse("Is valid" + form.cleaned_data)
     else:
-        form = CompanyForm()
-        
+        form = CompanyForm() 
+
     return render(request, 'munchee/search.html', {})

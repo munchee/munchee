@@ -16,7 +16,7 @@ from datetime import datetime
 #   position = models.CharField(max_length=80)
 
 class Company(models.Model):
-    name = models.CharField()
+    name = models.CharField(max_length=200)
     last_updated = models.DateTimeField()
     summary = models.TextField()
     ticker_symbol = models.CharField(max_length=80)
