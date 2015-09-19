@@ -13,6 +13,6 @@ def search(request):
         if form.is_valid():
             return HttpResponse("Is valid" + form.cleaned_data)
     else:
-        form = CompanyForm()
-        
+        form = CompanyForm() 
+
     return render(request, 'munchee/search.html', {})
