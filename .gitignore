@@ -67,3 +67,6 @@ settings_local.py
 
 # Operating system files
 .DS_Store
+
+# Virtualenv
+.venv
