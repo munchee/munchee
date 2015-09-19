@@ -19,7 +19,7 @@ from munchee import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', views.search, name='search'),
+    url(r'^search/', views.search, name='search'),
     url(r'^$', views.home, name='home'),
     url('', include('social.apps.django_app.urls', namespace='social'))
 ]

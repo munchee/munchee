@@ -1,5 +1,4 @@
 django
-django-haystack
-pysolr
 numpy
+python-linkedin
 python-social-auth
