@@ -1,5 +1,6 @@
 from django.db import models
 from munchee.custom import SeparatedValuesField
+from django.utils import timezone
 
 from datetime import datetime
 # from django.utils import timezone
@@ -24,15 +25,23 @@ class Company(models.Model):
     # LinkedIn
     website = models.CharField(max_length=500)
     industry = models.CharField(max_length=500)
-    location = models.TextField()
+    locations = models.TextField()#SeparatedValuesField()
     ticker_symbol = models.CharField(max_length=80)
+    description = models.CharField(max_length=500)
+    logo_url = models.TextField()
 
     # Google
     news = models.TextField()
 
-    # Wikipedia
-    summary = models.TextField()
-    descriptions = SeparatedValuesField()
+    def save(self, *args, **kwargs):
+        '''
+        On save update timestamps
+        :param args:
+        :param kwargs:
+        :return:
+        '''
+        self.last_updated = timezone.now()
+        return super(Company, self).save(*args, **kwargs)
 
 class Profile(models.Model):
     user_id = models.CharField(max_length=80, unique=True, primary_key=True)

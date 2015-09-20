@@ -7,6 +7,7 @@ from .models import *
 from linkedin.linkedin import (LinkedInAuthentication, LinkedInApplication,
                                PERMISSIONS)
 from django.conf import settings
+from .scrapers import *
 
 # Create your views here.
 def home(request):
@@ -16,12 +17,63 @@ def home(request):
         return render(request, 'munchee/home.html', {})
 
 def search(request):
+    debug = ''
     if request.method == 'POST':
         form = CompanyForm(request.POST)
         if form.is_valid():
             #return HttpResponse("Is valid \n" + str(form.cleaned_data.keys()))
-            cleaned_info = form.cleaned_data
-            print(cleaned_info)
+            companies = [x.strip() for x in form.cleaned_data['companies'].split(',')]
+            keywords = [x.strip() for x in form.cleaned_data['keywords'].split(',')]
+
+            for company in companies:
+                ## start hitting multiple sites
+                # LinkedIn
+                data = scrape_linkedin_company(request.session['linkedin_access_token'], company)
+                debug += str(data)
+                if data['companies']['_count'] == 0:
+                    continue
+                # gonna take the first one lol
+                the_company = data['companies']['values'][0]
+                id = the_company['id']
+
+
+                # get the company entry in database, if any
+                try:
+                    company_db = Company.objects.get(id=id)
+                    if company_db.last_updated - timezone.now() < timezone.timedelta(days=1):
+                        continue
+                except Company.DoesNotExist:
+                    company_db = Company()
+
+                name = the_company['name']
+                website = the_company['websiteUrl']
+                raw_locations = the_company['locations']
+                if raw_locations['_total'] == 0:
+                    locations = []
+                else:
+                    locations = [x['address']['city'] for x in raw_locations['values']]
+                ticker = the_company['ticker']
+                description = the_company['description']
+                logo_url = the_company['logoUrl']
+
+                # Google
+                news = '' # temporary empty
+
+                company_db.name = name
+                company_db.website = website
+                company_db.locations = ','.join(locations)
+                company_db.ticker = ticker
+                company_db.description = description
+                company_db.logo_url = logo_url
+                company_db.news = news
+
+                company_db.save()
+
+
+            # throw text analysis here lol
+
+            return HttpResponse(debug + "<br><br><br>" + str(company_db))
+
     else:
         form = CompanyForm() 
 
@@ -38,7 +90,7 @@ def oauth_callback(request):
     authentication = LinkedInAuthentication(settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY,
                                             settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET,
                                             settings.RETURN_URL,
-                                            PERMISSIONS.enums.values())
+                                            [PERMISSIONS.BASIC_PROFILE, PERMISSIONS.EMAIL_ADDRESS])
     if request.method == 'GET':
         form = OAuthCallbackForm(request.GET)
         if form.is_valid():

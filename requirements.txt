@@ -1,3 +1,4 @@
-django
-python-linkedin
+django==1.8.4
+python-linkedin==4.2
 python-social-auth
+wikipedia==1.4.0
