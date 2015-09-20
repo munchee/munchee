@@ -54,14 +54,17 @@ def oauth_callback(request):
                                                               'email-address', 'summary'])
 
             # store profile
-            summary = profile_data['summary']
-            if not summary:
+            try:
+                summary = profile_data['summary']
+            except KeyError:
                 summary = ''
 
-            profile_db = Profile(user_id = profile_data['id'], first_name=profile_data['firstName'],
+            profile_db = Profile(user_id=profile_data['id'], first_name=profile_data['firstName'],
                                  last_name=profile_data['lastName'], email=profile_data['emailAddress'],
                                  summary=summary, industry=profile_data['industry'],
                                  location_name=profile_data['location']['name'])
+
+            profile_db.save()
 
             # redirect to search page
             return HttpResponseRedirect("/search/")
