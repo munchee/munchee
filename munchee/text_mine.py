@@ -38,6 +38,9 @@ def get_match_percentage(companytxt, fd_user_ls, company_common_num=50):
 			rankings.append(company_common_num-i-1)
 	max_score = sum(range(company_common_num)[company_common_num-len(fd_user_ls):])
 
+	if max_score == 0:
+		return 0
+
 	return sqrt((sum(rankings)/max_score)*100)*10
 
 def stemmed_top_user_words(usertxt, num=10):
