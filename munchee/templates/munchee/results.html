@@ -22,21 +22,31 @@
 	</head>
 
 	<body background="/static/munchee/background.png">
-
+        {% for company in companies %}
 		<div>
-			<img src="/static/munchee/placeholder.jpg" class="placeholder"\>
+        {% if company.logo_url != "" %}
+            <img src="{{ company.logo_url }}" class="placeholder"\>
+        {% else %}
+            <img src="/static/munchee/placeholder.jpg" class="placeholder"\>
+        {% endif %}
 
 			<div style="margin-top: 50px">
-				<h3 >Name</h3>
+				<h3>{{ company.name }}</h3>
 
-				<p>Ticker</p>
+				<p>{{ company.ticker_symbol }}</p>
 
-				<p>Website</p>
+				<p>{{ company.website }}</p>
 
-				<p>Summary text here</p>
+				<h4>{{ company.description }}</h4>
+
+				<p>{{ company.score }}</p>
 			</div>
 		</div>
+        {% endfor %}
 
+    {% if debug != "" %}
+        <!-- {{ debug }} -->
+    {% endif %}
 	</body>
 </html>
 
