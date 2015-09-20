@@ -39,8 +39,8 @@ def search(request):
         if form.is_valid():
             company_dbs = []
             #return HttpResponse("Is valid \n" + str(form.cleaned_data.keys()))
-            companies = [x.strip() for x in form.cleaned_data['companies'].split(',')]
-            keywords = [x.strip() for x in form.cleaned_data['keywords'].split(',')]
+            companies = [x.strip() for x in form.cleaned_data['companies'].replace('\n',',').split(',')]
+            keywords = [x.strip() for x in form.cleaned_data['keywords'].replace.split(',')]
 
             # remove duplicates
             companies = list(set(companies))
