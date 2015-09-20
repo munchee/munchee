@@ -13,3 +13,7 @@
 	margin: 0px 50px 50px 50px;
 	float: left;
 }
+
+.form_control{
+	resize: vertical;
+}
