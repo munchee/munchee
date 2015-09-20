@@ -1,11 +1,17 @@
 .centre {
-  display: block;
-  position: relative;
-  top: 20%;
-  max-width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
+	display: block;
+	position: relative;
+	top: 20%;
+	max-width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+
+.placeholder {
+	width: 10%;
+	margin: 0px 50px 50px 50px;
+	float: left;
 }
 
 h1 {
