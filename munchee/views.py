@@ -74,7 +74,7 @@ def search(request):
                 if raw_locations['_total'] == 0:
                     locations = []
                 else:
-                    locations = [x['address']['city'] for x in raw_locations['values']]
+                    locations = [x['address'].get('city', "") for x in raw_locations['values']]
                 ticker = the_company.get('ticker', "")
                 description = the_company.get('description', "")
                 logo_url = the_company.get('logoUrl', "")
