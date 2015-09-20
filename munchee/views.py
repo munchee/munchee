@@ -107,7 +107,7 @@ def search(request):
                 
                 try:
                     company_text = [company_db,locations,description,news]
-                    company_text.append(wikipedia.page(company_db.name+', company').summary)
+                    company_text.append(str(wikipedia.page(company_db.name+', company').summary))
                 except:
                     pass
                 finally:
