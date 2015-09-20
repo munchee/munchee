@@ -38,7 +38,6 @@ def search(request):
             # remove duplicates
             companies = list(set(companies))
             keywords = list(set(keywords))
-
             user_db = Profile.objects.get(user_id=request.session['linkedin_userid'])
             user_text = ' '.join([user_db.summary, user_db.industry, user_db.location_name])
             user_text = ' '.join(keywords) + ' ' + user_text
@@ -49,6 +48,7 @@ def search(request):
                 ## start hitting multiple sites
                 # LinkedIn
                 data = scrape_linkedin_company(request.session['linkedin_access_token'], company)
+                print(data)
                 debug += str(data)
                 try:
                     if data['companies']['_count'] == 0:
@@ -101,7 +101,7 @@ def search(request):
                                wikipedia.page(company_db.name+', company').summary])
                 company_db.score = get_match_percentage(company_text,user_words)
                 company_db.freq_words = ', '.join([x[0] for x in get_most_occured(company_text, 20)])
-            debug = "" # clear debug because too lazy to remove
+            #debug = "" # clear debug because too lazy to remove
             return render(request, "munchee/results.html", {"companies": company_dbs, "debug": debug})
             #return HttpResponse(debug + "<br><br><br>")
 
