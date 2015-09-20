@@ -31,7 +31,6 @@ def search(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             company_dbs = []
-            company_ratings = {}
             #return HttpResponse("Is valid \n" + str(form.cleaned_data.keys()))
             companies = [x.strip() for x in form.cleaned_data['companies'].split(',')]
             keywords = [x.strip() for x in form.cleaned_data['keywords'].split(',')]
@@ -100,10 +99,10 @@ def search(request):
                 # text mining/analysis
                 company_text = ' '.join([company_db.locations,description,news,\
                                wikipedia.page(company_db.name+', company').summary])
-                company_ratings[company_id] = get_match_percentage(company_text,user_words)
-                company_db.score = company_ratings[company_id]
+                company_db.score = get_match_percentage(company_text,user_words)
+                company_db.freq_words = ', '.join([x[0] for x in get_most_occured(company_text, 20)])
             debug = "" # clear debug because too lazy to remove
-            return render(request, "munchee/results.html", {"companies": company_dbs, "ratings": company_ratings, "debug": debug})
+            return render(request, "munchee/results.html", {"companies": company_dbs, "debug": debug})
             #return HttpResponse(debug + "<br><br><br>")
 
     elif request.session.get('linkedin_access_token', None):

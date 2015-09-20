@@ -19,7 +19,10 @@
 
 				<h4>{{ company.description }}</h4>
 
-				<p>{{ company.score }}</p>
+				<!--<p>{{ company.score }}</p>-->
+                <p>
+                Most used keywords: {{ company.freq_words }}
+                </p>
 			</div>
 		</div>
         {% endfor %}
