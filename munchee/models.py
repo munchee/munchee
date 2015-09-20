@@ -16,26 +16,26 @@ from datetime import datetime
 #   position = models.CharField(max_length=80)
 
 class Company(models.Model):
+    # General
+    id = models.CharField(max_length=80, unique=True, primary_key=True) # from LinkedIn
     name = models.CharField(max_length=200)
     last_updated = models.DateTimeField()
-    summary = models.TextField()
+
+    # LinkedIn
+    website = models.CharField(max_length=500)
+    industry = models.CharField(max_length=500)
+    location = models.TextField()
     ticker_symbol = models.CharField(max_length=80)
-    # id = models.CharField(max_length=80)
 
-    relevant_skills = models.TextField(default="{}")
-    links = SeparatedValuesField()
-    positions = SeparatedValuesField()
+    # Google
+    news = models.TextField()
 
-    def update():
-        # crawls relevant pages to update summary and positions if necessary
-        last_updated = datetime.now()
-        # update summary
-        # update relevant skills
-        # update links
-        # update positions
+    # Wikipedia
+    summary = models.TextField()
+    descriptions = SeparatedValuesField()
 
 class Profile(models.Model):
-    user_id = models.CharField(max_length=80, unique=True)
+    user_id = models.CharField(max_length=80, unique=True, primary_key=True)
 
     first_name = models.CharField(max_length=80)
     last_name = models.CharField(max_length=80)

@@ -9,7 +9,10 @@ from django.conf import settings
 
 # Create your views here.
 def home(request):
-    return render(request, 'munchee/home.html', {})
+    if request.session.get('linkedin_access_token', None):
+        return HttpResponseRedirect('/search/')
+    else:
+        return render(request, 'munchee/home.html', {})
 
 def search(request):
     if request.method == 'POST':
@@ -49,21 +52,35 @@ def oauth_callback(request):
 
             application = LinkedInApplication(token=token)
 
-            # get profile
+            # get profile from LinkedIn
             profile_data = application.get_profile(selectors=['id', 'first-name', 'last-name', 'location', 'industry',
                                                               'email-address', 'summary'])
 
-            # store profile
+            # Try to get summary data
             try:
                 summary = profile_data['summary']
             except KeyError:
                 summary = ''
 
-            profile_db = Profile(user_id=profile_data['id'], first_name=profile_data['firstName'],
+            # Get existing profile in database
+            try:
+                profile_db = Profile.objects.get(user_id=profile_data['id'])
+
+                profile_db.user_id=profile_data['id']
+                profile_db.first_name=profile_data['firstName']
+                profile_db.last_name=profile_data['lastName']
+                profile_db.email=profile_data['emailAddress']
+                profile_db.summary=summary
+                profile_db.industry=profile_data['industry']
+                profile_db.location_name=profile_data['location']['name']
+
+            except Profile.DoesNotExist:
+                profile_db = Profile(user_id=profile_data['id'], first_name=profile_data['firstName'],
                                  last_name=profile_data['lastName'], email=profile_data['emailAddress'],
                                  summary=summary, industry=profile_data['industry'],
                                  location_name=profile_data['location']['name'])
 
+            # store profile
             profile_db.save()
 
             # redirect to search page
