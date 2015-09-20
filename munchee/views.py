@@ -36,6 +36,10 @@ def search(request):
             companies = [x.strip() for x in form.cleaned_data['companies'].split(',')]
             keywords = [x.strip() for x in form.cleaned_data['keywords'].split(',')]
 
+            # remove duplicates
+            companies = list(set(companies))
+            keywords = list(set(keywords))
+
             user_db = Profile.objects.get(user_id=request.session['linkedin_userid'])
             user_text = ' '.join([user_db.summary, user_db.industry, user_db.location_name])
             user_text = ' '.join(keywords) + ' ' + user_text
