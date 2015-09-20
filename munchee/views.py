@@ -26,6 +26,7 @@ def logout(request):
     return HttpResponseRedirect("/")
 
 def search(request):
+    debug = ""
     if request.method == 'POST':
         form = CompanyForm(request.POST)
         if form.is_valid():
@@ -45,7 +46,7 @@ def search(request):
                 ## start hitting multiple sites
                 # LinkedIn
                 data = scrape_linkedin_company(request.session['linkedin_access_token'], company)
-                #debug += str(data)
+                debug += str(data)
                 try:
                     if data['companies']['_count'] == 0:
                         continue
@@ -97,8 +98,8 @@ def search(request):
                                wikipedia.page(company_db.name+', company').summary])
                 company_ratings[company_id] = get_match_percentage(company_text,user_words)
                 company_db.score = company_ratings[company_id]
-
-            return render(request, "munchee/results.html", {"companies": company_dbs, "ratings": company_ratings})
+            debug = "" # clear debug because too lazy to remove
+            return render(request, "munchee/results.html", {"companies": company_dbs, "ratings": company_ratings, "debug": debug})
             #return HttpResponse(debug + "<br><br><br>")
 
     elif request.session.get('linkedin_access_token', None):
