@@ -72,7 +72,7 @@ def search(request):
                     locations = []
                 else:
                     locations = [x['address']['city'] for x in raw_locations['values']]
-                ticker = the_company['ticker']
+                ticker = the_company.get('ticker', "")
                 description = the_company['description']
                 logo_url = the_company['logoUrl']
 
