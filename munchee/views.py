@@ -69,15 +69,15 @@ def search(request):
                     company_db = Company()
 
                 name = the_company['name']
-                website = the_company['websiteUrl']
-                raw_locations = the_company['locations']
+                website = the_company.get('websiteUrl', "")
+                raw_locations = the_company.get('locations', "")
                 if raw_locations['_total'] == 0:
                     locations = []
                 else:
                     locations = [x['address']['city'] for x in raw_locations['values']]
                 ticker = the_company.get('ticker', "")
-                description = the_company['description']
-                logo_url = the_company['logoUrl']
+                description = the_company.get('description', "")
+                logo_url = the_company.get('logoUrl', "")
 
                 # Google
                 news = '' # temporary empty
