@@ -58,7 +58,7 @@ def search(request):
                 print(data)
                 debug += str(data)
                 try:
-                    if data['companies']['_count'] == 0:
+                    if data['companies']['_total'] == 0:
                         continue
                 except KeyError:
                     pass
@@ -67,7 +67,7 @@ def search(request):
                     the_company = data['companies']['values'][0]
                     company_id = the_company['id']
                 except:
-                    return HttpResponse(debug)
+                    return HttpResponseRedirectttpResponse(debug)
 
 
                 # get the company entry in database, if any
