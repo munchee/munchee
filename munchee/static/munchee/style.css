@@ -1,4 +1,4 @@
-.search {
+.centre {
   display: block;
   position: relative;
   top: 20%;
@@ -6,11 +6,6 @@
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
-}
-
-.header {
-	width: 100%;
-	height: 20px;
 }
 
 h1 {
