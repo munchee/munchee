@@ -106,7 +106,7 @@ def search(request):
                 # text mining/analysis
                 
                 try:
-                    company_text = [company_db,locations,description,news]
+                    company_text = [company_db.locations,description,news]
                     company_text.append(str(wikipedia.page(company_db.name+', company').summary))
                 except:
                     pass
