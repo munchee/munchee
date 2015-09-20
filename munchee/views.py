@@ -54,7 +54,7 @@ def search(request):
                     if data['companies']['_count'] == 0:
                         continue
                 except KeyError:
-                    continue
+                    pass
                 # gonna take the first one lol
                 the_company = data['companies']['values'][0]
                 company_id = the_company['id']
