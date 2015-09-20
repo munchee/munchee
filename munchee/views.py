@@ -67,7 +67,7 @@ def search(request):
                     the_company = data['companies']['values'][0]
                     company_id = the_company['id']
                 except:
-                    return httpResponse(debug)
+                    return HttpResponse(debug)
 
 
                 # get the company entry in database, if any
