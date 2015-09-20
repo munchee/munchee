@@ -23,7 +23,7 @@
 
 				<p>{{ company.ticker_symbol }}</p>
 
-				<p>{{ company.website }}</p>
+				<p><a href="{{ company.website }}">{{ company.website }}</a></p>
 
 				<h4>{{ company.description }}</h4>
 
@@ -31,6 +31,8 @@
 			</div>
 		</div>
         {% endfor %}
+
+        <a href="/search/">Return to Search.</a>
 
     {% if debug != "" %}
         <!-- {{ debug }} -->
