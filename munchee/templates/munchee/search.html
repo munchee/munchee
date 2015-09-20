@@ -1,28 +1,14 @@
+{% include "munchee/base.html" %}
 <html>
 	<head>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-		<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-		<link rel="stylesheet" type="text/css" href="/static/munchee/style.css" />
-
-		<title>munchee</title>
-
 		<div style="clear: both">
-			<h3 style="float: left; margin-left: 20px">munchee<h3>
-
-			<h3 style="float: right; margin-right: 20px"><a href="/logout/">Log Out</a></h3>
+			<h3 style="float: right; padding-right: 30px"><a href="/logout/">Log Out</a></h3>
 		</div>
 	</head>
 
 	<body background="/static/munchee/background.png">
 		<div class="centre">
-			<h1 align="center">munchee</h1>
+			<img src="/static/munchee/logo.png" style="display: block; margin-left: auto; margin-right: auto"/>
 			<form action="/search/" method="post">
 				{% csrf_token %}
 				<br>
