@@ -1,5 +1,4 @@
 from django.db import models
-from munchee.custom import SeparatedValuesField
 from django.utils import timezone
 
 from datetime import datetime
