@@ -1,3 +1,4 @@
+## This is really the Controller part of MVC. Yes this is weird. Very weird.
 from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
