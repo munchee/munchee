@@ -104,8 +104,14 @@ def search(request):
                 company_dbs.append(company_db)
 
                 # text mining/analysis
-                company_text = ' '.join([company_db.locations,description,news,\
-                               wikipedia.page(company_db.name+', company').summary])
+                
+                try:
+                    company_text = [company_db,locations,description,news]
+                    company_text.append(wikipedia.page(company_db.name+', company').summary)
+                except:
+                    pass
+                finally:
+                    company_text = ' '.join(company_text)
                 company_db.score = get_match_percentage(company_text,user_words)
                 company_db.freq_words = ', '.join([x[0] for x in get_most_occured(company_text, 20)])
             #debug = "" # clear debug because too lazy to remove
