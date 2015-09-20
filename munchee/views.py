@@ -63,8 +63,11 @@ def search(request):
                 except KeyError:
                     pass
                 # gonna take the first one lol
-                the_company = data['companies']['values'][0]
-                company_id = the_company['id']
+                try:
+                    the_company = data['companies']['values'][0]
+                    company_id = the_company['id']
+                except:
+                    return httpResponse(debug)
 
 
                 # get the company entry in database, if any
