@@ -19,7 +19,8 @@ from munchee import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^search/', views.search, name='search'),
+    url(r'^search/', views.search_form, name='search_form'),
+    url(r'^results/', views.search, name='search_results'),
     url(r'^$', views.home, name='home'),
     url(r'^complete/linkedin-oauth2/', views.oauth_callback, name='oauth_callback'),
     url(r'^login/', views.oauth_login_start, name="oauth_login_start"),

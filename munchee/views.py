@@ -25,6 +25,13 @@ def logout(request):
         del request.session['linkedin_userid']
     return HttpResponseRedirect("/")
 
+def search_form(request):
+    if request.session.get('linkedin_access_token', None):
+        form = CompanyForm()
+        return render(request, 'munchee/search.html', {})
+    else:
+        return HttpResponseRedirect("/")
+
 def search(request):
     debug = ""
     if request.method == 'POST':
@@ -106,11 +113,9 @@ def search(request):
             #return HttpResponse(debug + "<br><br><br>")
 
     elif request.session.get('linkedin_access_token', None):
-        form = CompanyForm()
+        return HttpResponseRedirect("/search/")
     else:
         return HttpResponseRedirect("/")
-
-    return render(request, 'munchee/search.html', {})
 
 def oauth_login_start(request):
     authentication = LinkedInAuthentication(settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY,
