@@ -1,6 +1,6 @@
 from munchee.settings import *
 # Azure prod-specific variables config
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["mchee.co"]
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ["LINKEDIN_KEY"]
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ["LINKEDIN_SECRET"]
