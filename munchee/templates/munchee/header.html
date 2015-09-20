@@ -11,19 +11,14 @@
 	<link rel="stylesheet" type="text/css" href="/static/munchee/style.css" />
 
 	<title>munchee</title>
+
+	<div class="header">
+		<h3>munchee<h3>
+	</div>	
+
+	<hr>
 </head>
 
-<body class="search" background="/static/munchee/background.png">
-	<h1 align="center">munchee</h1>
-	<form action="/search/" method="post">
-		{% csrf_token %}
-		<br>
-		<textarea class="form-control" name="companies" placeholder="e.g. Google, Apple, Bloomberg, ..."></textarea>
-		<br>
-		<textarea class="form-control" name="keywords" placeholder="e.g. software, technology, ..."></textarea>
-		<br>
-		<button type="submit" class="btn btn-primary center-block">Munch!</button>
-	</form>
+<body>
 </body>
 </html>
-
