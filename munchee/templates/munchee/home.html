@@ -1,24 +1,23 @@
 {% include "munchee/base.html" %}
 <html>
 	<head>
-		<div class=row>
-			<h3 style="float: right; margin-right: 30px"><a href="/logout/">Log Out</a></h3>
-		</div>
 	</head>
 
 	<body background="/static/munchee/background.png">
 		<div class="centre">
 			<img src="/static/munchee/logo.png" style="display: block; margin-left: auto; margin-right: auto"/>
-			<form action="/search/" method="post">
-				{% csrf_token %}
-				<br>
-				<textarea class="form-control" name="companies" placeholder="e.g. Google, Apple, Bloomberg, ..."></textarea>
-				<br>
-				<textarea class="form-control" name="keywords" placeholder="e.g. software, technology, ..."></textarea>
-				<br>
-				<button type="submit" class="btn btn-primary center-block">Munch!</button>
-			</form>
+
+			<hr>
+
+			<p style="text-align:center">
+				Bacon ipsum dolor amet picanha prosciutto pork cillum, meatball dolore jowl eu in biltong doner pork loin. In proident sausage deserunt chuck excepteur turkey ipsum sirloin tenderloin duis. Cupim leberkas porchetta proident ut doner. Corned beef cillum filet mignon sausage minim strip steak turkey occaecat. Chuck cupidatat alcatra tri-tip aliqua dolore do tail spare ribs chicken. Do officia voluptate, shank esse pariatur lorem shoulder shankle pork loin chicken et frankfurter. Excepteur drumstick spare ribs turkey, ullamco sirloin cupidatat irure shoulder t-bone nostrud ground round dolor jerky do.
+
+				<br><br>
+
+				<a href="/login/"><img src="/static/munchee/Sign-in-Large-Default.png"\></a>
+			</p>
+
+			<br>
 		</div>
 	</body>
 </html>
-
