@@ -16,6 +16,10 @@ def home(request):
     else:
         return render(request, 'munchee/home.html', {})
 
+def logout(request):
+    del request.session['linkedin_access_token']
+    return HttpResponseRedirect("/")
+
 def search(request):
     debug = ''
     if request.method == 'POST':
@@ -30,7 +34,10 @@ def search(request):
                 # LinkedIn
                 data = scrape_linkedin_company(request.session['linkedin_access_token'], company)
                 debug += str(data)
-                if data['companies']['_count'] == 0:
+                try:
+                    if data['companies']['_count'] == 0:
+                        continue
+                except KeyError:
                     continue
                 # gonna take the first one lol
                 the_company = data['companies']['values'][0]
@@ -72,10 +79,12 @@ def search(request):
 
             # throw text analysis here lol
 
-            return HttpResponse(debug + "<br><br><br>" + str(company_db))
+            return HttpResponse(debug + "<br><br><br>")
 
+    elif request.session.get('linkedin_access_token', None):
+        form = CompanyForm()
     else:
-        form = CompanyForm() 
+        return HttpResponseRedirect("/")
 
     return render(request, 'munchee/search.html', {})
 

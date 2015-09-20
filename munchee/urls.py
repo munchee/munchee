@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^complete/linkedin-oauth2/', views.oauth_callback, name='oauth_callback'),
     url(r'^login/', views.oauth_login_start, name="oauth_login_start"),
+    url(r'^logout/', views.logout, name="logout"),
     url('', include('social.apps.django_app.urls', namespace='social'))
 ]
