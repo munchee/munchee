@@ -58,3 +58,4 @@ class Profile(models.Model):
 class Experience(models.Model):
     summary = models.TextField()
     expressed_skills = models.TextField(default='{}')
+

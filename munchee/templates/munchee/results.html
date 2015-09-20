@@ -1,4 +1,4 @@
-</html>
+<html>
 	<head>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -22,22 +22,27 @@
 	</head>
 
 	<body background="/static/munchee/background.png">
-
+        {% for company in companies %}
 		<div>
-			<img src="/static/munchee/placeholder.jpg" class="placeholder"\>
+        {% if company.logo_url != "" %}
+            <img src="{{ company.logo_url }}" class="placeholder"\>
+        {% else %}
+            <img src="/static/munchee/placeholder.jpg" class="placeholder"\>
+        {% endif %}
 
 			<div style="margin-top: 50px">
-				<h3 >Name</h3>
+				<h3>{{ company.name }}</h3>
 
-				<p>Ticker</p>
+				<p>{{ company.ticker_symbol }}</p>
 
-				<p>Website</p>
+				<p>{{ company.website }}</p>
 
-				<h4>Summary</h4>
+				<h4>{{ company.description }}</h4>
 
-				<p>Summary text here</p>
+				<p>{{ company.score }}</p>
 			</div>
 		</div>
+        {% endfor %}
 
 	</body>
 </html>
