@@ -1,6 +1,7 @@
 {% include "munchee/base.html" %}
-{% include "munchee/navbar.html" %}
 	<body background="/static/munchee/background.png">
+{% include "munchee/navbar.html" %}
+    <br><br>
         {% for company in companies %}
 		<div>
         {% if company.logo_url != "" %}
