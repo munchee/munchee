@@ -70,7 +70,7 @@ def search(request):
 
                 name = the_company['name']
                 website = the_company.get('websiteUrl', "")
-                raw_locations = the_company.get('locations', "")
+                raw_locations = the_company.get('locations', {"_total": 0})
                 if raw_locations['_total'] == 0:
                     locations = []
                 else:
