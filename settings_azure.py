@@ -1,12 +1,12 @@
 from munchee.settings import *
 # Azure prod-specific variables config
 DEBUG = False
-ALLOWED_HOSTS = ["munchee.cloudapp.net", "mchee.co"]
+ALLOWED_HOSTS = ["mchee.co"]
 SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY = os.environ["LINKEDIN_KEY"]
 SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET = os.environ["LINKEDIN_SECRET"]
-SECRET_KEY = os.environ["DJANGO_KEY"]
+SECRET_KEY = os.environ["SECRET_KEY"]
 STATIC_ROOT = '/var/www/munchee/static'
-RETURN_URL = "http://munchee.cloudapp.net/complete/linkedin-oauth2/"
+RETURN_URL = "http://mchee.co/complete/linkedin-oauth2/"
 
 ### log Django errors to the root of your Azure Website
 #LOGGING = {
