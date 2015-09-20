@@ -9,36 +9,44 @@ from datetime import datetime
 
 
 # class Job(models.Model):
-# 	relevant_skills = models.TextField(default='{}')
-# 	company = models.ForeignKey(Company)
-# 	summary = models.TextField()
-# 	location = models.CharField(max_length=80)
-# 	position = models.CharField(max_length=80)
+#   relevant_skills = models.TextField(default='{}')
+#   company = models.ForeignKey(Company)
+#   summary = models.TextField()
+#   location = models.CharField(max_length=80)
+#   position = models.CharField(max_length=80)
 
 class Company(models.Model):
-	last_updated = models.DateTimeField()
-	summary = models.TextField()
-	ticker_symbol = models.CharField(max_length=80)
-	# id = models.CharField(max_length=80)
+    # General
+    id = models.CharField(max_length=80, unique=True, primary_key=True) # from LinkedIn
+    name = models.CharField(max_length=200)
+    last_updated = models.DateTimeField()
 
-	relevant_skills = models.TextField(default="{}")
-	links = SeparatedValuesField()
-	positions = SeparatedValuesField()
+    # LinkedIn
+    website = models.CharField(max_length=500)
+    industry = models.CharField(max_length=500)
+    location = models.TextField()
+    ticker_symbol = models.CharField(max_length=80)
 
-	def update():
-		# crawls relevant pages to update summary and positions if necessary
-		last_updated = datetime.now()
-		# update summary
-		# update relevant skills
-		# update links
-		# update positions
+    # Google
+    news = models.TextField()
+
+    # Wikipedia
+    summary = models.TextField()
+    descriptions = SeparatedValuesField()
 
 class Profile(models.Model):
-	name = models.CharField(max_length=80)
+    user_id = models.CharField(max_length=80, unique=True, primary_key=True)
 
-	relevant_skills = models.TextField(default='{}')
-	interested_positions = SeparatedValuesField()
+    first_name = models.CharField(max_length=80)
+    last_name = models.CharField(max_length=80)
+
+    email = models.EmailField(unique=True)
+
+    summary = models.CharField(max_length=500)
+    #relevant_skills = models.TextField(default='{}')
+    industry = models.CharField(max_length=40)
+    location_name = models.CharField(max_length=255)
 
 class Experience(models.Model):
-	summary = models.TextField()
-	expressed_skills = models.TextField(default='{}')
+    summary = models.TextField()
+    expressed_skills = models.TextField(default='{}')

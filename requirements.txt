@@ -1,2 +1,3 @@
 django
+python-linkedin
 python-social-auth
