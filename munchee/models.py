@@ -35,10 +35,17 @@ class Company(models.Model):
         # update positions
 
 class Profile(models.Model):
-    name = models.CharField(max_length=80)
+    user_id = models.CharField(max_length=80, unique=True)
 
-    relevant_skills = models.TextField(default='{}')
-    interested_positions = SeparatedValuesField()
+    first_name = models.CharField(max_length=80)
+    last_name = models.CharField(max_length=80)
+
+    email = models.EmailField(unique=True)
+
+    summary = models.CharField(max_length=500)
+    #relevant_skills = models.TextField(default='{}')
+    industry = models.CharField(max_length=40)
+    location_name = models.CharField(max_length=255)
 
 class Experience(models.Model):
     summary = models.TextField()

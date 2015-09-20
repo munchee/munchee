@@ -50,8 +50,22 @@ def oauth_callback(request):
             application = LinkedInApplication(token=token)
 
             # get profile
-            profile_raw = application.get_profile()
+            profile_data = application.get_profile(selectors=['id', 'first-name', 'last-name', 'location', 'industry',
+                                                              'email-address', 'summary'])
 
-            return HttpResponse(str(profile_raw))
+            # store profile
+            summary = profile_data['summary']
+            if not summary:
+                summary = ''
+
+            profile_db = Profile(user_id = profile_data['id'], first_name=profile_data['firstName'],
+                                 last_name=profile_data['lastName'], email=profile_data['emailAddress'],
+                                 summary=summary, industry=profile_data['industry'],
+                                 location_name=profile_data['location']['name'])
+
+            # redirect to search page
+            return HttpResponseRedirect("/search/")
+
+            #return HttpResponse(str(profile_data))
 
             # do stuff with application and then return list. Possibly store application in session data
