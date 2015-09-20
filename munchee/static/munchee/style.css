@@ -1,7 +1,7 @@
 .centre {
 	display: block;
 	position: relative;
-	top: 30%;
+	top: 20%;
 	max-width: 70%;
 	margin-left: auto;
 	margin-right: auto;
@@ -12,9 +12,4 @@
 	width: 10%;
 	margin: 0px 50px 50px 50px;
 	float: left;
-}
-
-h1 {
-	font-family: 'ITC Avant Garde Gothic Pro';
-	font-weight: 500;
 }
