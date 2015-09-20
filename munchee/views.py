@@ -6,6 +6,7 @@ from .models import *
 from linkedin.linkedin import (LinkedInAuthentication, LinkedInApplication,
                                PERMISSIONS)
 from django.conf import settings
+import json
 
 # Create your views here.
 def home(request):
@@ -27,7 +28,7 @@ def oauth_login_start(request):
     authentication = LinkedInAuthentication(settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_KEY,
                                             settings.SOCIAL_AUTH_LINKEDIN_OAUTH2_SECRET,
                                             settings.RETURN_URL,
-                                            PERMISSIONS.enums.values())
+                                            PERMISSIONS.enums)
     return HttpResponseRedirect(authentication.authorization_url)
 
 def oauth_callback(request):
@@ -44,6 +45,16 @@ def oauth_callback(request):
             authentication.authorization_code = form.cleaned_data['code']
             token = authentication.get_access_token()
 
+            # store access token in session
+            request.session['linkedin_access_token'] = token
+
             application = LinkedInApplication(token=token)
+
+            # get profile
+            profile_raw = application.get_profile()
+
+            profileinfo = json.loads(profile_raw)
+
+            return HttpResponse(profile_raw)
 
             # do stuff with application and then return list. Possibly store application in session data
